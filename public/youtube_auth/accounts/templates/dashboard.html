@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+  body {
+    font-family: "Roboto", Arial, sans-serif;
+    background-color: #f9f9f9;
+  }
+
+  .dashboard-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .dashboard-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  .profile-pic {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    background-color: #eee;
+  }
+
+  .dashboard-header h2 {
+    margin: 0;
+    font-size: 26px;
+    color: #202020;
+    font-weight: 500;
+  }
+
+  .dashboard-details {
+    line-height: 2;
+    color: #555;
+    font-size: 16px;
+  }
+
+  @media (max-width: 600px) {
+    .dashboard-container {
+      margin: 20px;
+      padding: 20px;
+    }
+
+    .dashboard-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .profile-pic {
+      width: 80px;
+      height: 80px;
+    }
+
+    .dashboard-header h2 {
+      font-size: 22px;
+    }
+
+    .dashboard-details {
+      font-size: 15px;
+    }
+  }
+</style>
+
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    {% if user.profile.profile_image %}
+      <img src="{{ user.profile.profile_image.url }}" alt="Profile Image" class="profile-pic">
+    {% else %}
+      <img src="https://i.ibb.co/2yv8T3R/user.png" alt="Default" class="profile-pic">
+    {% endif %}
+    <h2>Welcome, {{ user.username }}</h2>
+  </div>
+
+  <div class="dashboard-details">
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Date Joined:</strong> {{ user.date_joined|date:"F j, Y" }}</p>
+    <p><strong>Last Login:</strong> {{ user.last_login|date:"F j, Y, g:i a" }}</p>
+  </div>
+</div>
+{% endblock %}

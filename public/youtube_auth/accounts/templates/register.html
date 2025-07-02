@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+
+<style>
+  .form-container {
+    max-width: 450px;
+    margin: 10px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  .btn-youtube {
+    background-color: #cc0000;
+    border: none;
+    color: white;
+    border-radius: 50px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .btn-youtube:hover {
+    background-color: #b30000;
+  }
+</style>
+
+<div class="form-container">
+  <h3 class="text-center mb-4">Create your Mini YouTube account</h3>
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in form %}
+      <div class="mb-3">
+        {{ field.label_tag }}
+        {{ field }}
+        {% if field.errors %}
+          <div class="text-danger small">{{ field.errors }}</div>
+        {% endif %}
+      </div>
+    {% endfor %}
+    <div class="text-center">
+      <button type="submit" class="btn btn-youtube w-100">Register</button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}
